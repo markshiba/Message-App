@@ -1,0 +1,40 @@
+.sign-up {
+  background-color: #f8edeb;
+  padding: 2rem;
+  border-radius: 12px;
+
+  &-describe {
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+
+  &-form {
+    .form-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 1rem;
+      row-gap: 1rem;
+      margin-bottom: 2rem;
+
+      label {
+        font-size: 1.2rem;
+        font-weight: 500;
+
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      input,
+      select {
+        // width: 100%;
+        padding: 0.8rem;
+        font-size: 1rem;
+        font-family: inherit;
+        border: none;
+        background-color: #fdf2e9;
+        border-radius: 9px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}

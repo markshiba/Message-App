@@ -1,0 +1,26 @@
+.btn,
+.btn:link,
+.btn:visited {
+  display: inline-block;
+
+  text-decoration: none;
+  font-weight: 600;
+  padding: 1rem 2rem;
+  border-radius: 9px;
+
+  background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s;
+}
+
+.small {
+  padding: 0.5rem;
+}
+
+.btn:hover,
+.btn:active {
+  background-image: linear-gradient(135deg, #eb3b73 40%, #fd7932);
+}

@@ -1,0 +1,22 @@
+.login {
+  max-width: 90rem;
+  padding: 0 1.6rem;
+  margin: 0 auto;
+  height: 64px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+
+  .login-image {
+    width: 100%;
+    border-radius: 9px;
+  }
+
+  .login-header {
+    // font-size: ;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 2rem;
+  }
+}
