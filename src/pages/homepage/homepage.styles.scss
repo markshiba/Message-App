@@ -1,0 +1,18 @@
+.section {
+  height: calc(100vh - 130px);
+  width: 100%;
+
+  .chatting {
+    max-width: 70rem;
+    height: 100%;
+    margin: auto;
+    background-color: #f4f3f8;
+    border-radius: 10px;
+
+    padding: 1.6rem;
+    display: grid;
+    grid-template-columns: 70fr 30fr;
+
+    gap: 2rem;
+  }
+}

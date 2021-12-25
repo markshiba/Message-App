@@ -1,0 +1,32 @@
+.main__chatlist {
+  border-right: 1px solid #ebe7fb;
+  padding: 0 40px 0 0px;
+
+  .chatlist__heading {
+    margin-bottom: 2rem;
+  }
+
+  .search_wrap {
+    background-color: #e6e5ea;
+    border-radius: 5px;
+
+    input {
+      background-color: transparent;
+      border: none;
+      padding: 15px 15px;
+      outline: none;
+      width: 80%;
+      padding-right: 0;
+    }
+
+    .search-btn {
+      height: 35px;
+      border: none;
+      background-color: transparent;
+      outline: none;
+      width: 20%;
+      cursor: pointer;
+      font-size: 15px;
+    }
+  }
+}

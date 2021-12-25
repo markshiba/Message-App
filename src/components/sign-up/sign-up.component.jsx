@@ -58,7 +58,7 @@ const SignUp = ({ signUpStart }) => {
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <div className="form-info">
           <div>
-            <label for="displayName">Full Name</label>
+            <label>Full Name</label>
             <input
               id="displayName"
               type="text"
@@ -71,7 +71,7 @@ const SignUp = ({ signUpStart }) => {
           </div>
 
           <div>
-            <label for="email">Email address</label>
+            <label>Email address</label>
             <input
               id="email"
               type="email"
@@ -84,7 +84,7 @@ const SignUp = ({ signUpStart }) => {
           </div>
 
           <div>
-            <label for="password">Password</label>
+            <label>Password</label>
             <input
               id="password"
               type="password"
@@ -97,7 +97,7 @@ const SignUp = ({ signUpStart }) => {
           </div>
 
           <div>
-            <label for="confirmPassword">Confirm Password</label>
+            <label>Confirm Password</label>
             <input
               id="confirmedPassword"
               type="password"
@@ -110,7 +110,7 @@ const SignUp = ({ signUpStart }) => {
           </div>
 
           <div>
-            <label for="birthday">Birthday</label>
+            <label>Birthday</label>
             <input
               id="birthday"
               type="number"
@@ -123,7 +123,7 @@ const SignUp = ({ signUpStart }) => {
           </div>
 
           <div>
-            <label for="gender">Gender</label>
+            <label>Gender</label>
             <select
               onChange={handleChange}
               defaultValue="Select Gender"

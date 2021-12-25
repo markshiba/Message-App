@@ -1,0 +1,54 @@
+.chatting-content {
+  padding: 20px 40px;
+
+  &__header {
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ebe7fb;
+  }
+
+  &__body {
+    min-height: calc(100vh - calc(100vh / 2));
+    overflow: auto;
+  }
+
+  &__footer {
+    padding-top: 30px;
+  }
+}
+
+.send-message {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.send-message button {
+  width: 36px;
+  height: 36px;
+  background-color: #ecefff;
+  border: none;
+  box-shadow: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #4665ff;
+  padding: 0;
+  border-radius: 5px;
+  line-height: 36px;
+  transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+}
+.send-message button:hover {
+  transform: scale(1.2);
+}
+.send-message button i {
+  display: block;
+}
+.send-message input {
+  flex-grow: 1;
+  padding: 0 15px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}

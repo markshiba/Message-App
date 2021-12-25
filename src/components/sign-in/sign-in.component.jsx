@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Button from "../../components/button/button";
 
 import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import { firestore } from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
 
@@ -21,9 +22,11 @@ const SignIn = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(email, password);
-      await auth.signInWithEmailAndPassword(email, password);
-
+      const userAuth = await auth.signInWithEmailAndPassword(email, password);
+      const userRef = firestore.doc(`users/${userAuth.user.uid}`);
+      await userRef.update({
+        isOnline: true,
+      });
       setUserCredentials(...userCredentials, { email: "", password: "" });
     } catch (error) {
       console.log("sign in error");
@@ -35,7 +38,6 @@ const SignIn = () => {
       <div>
         <input
           className="sign-in-input"
-          id="email"
           type="email"
           name="email"
           value={email}
@@ -49,7 +51,6 @@ const SignIn = () => {
       <div>
         <input
           className="sign-in-input"
-          id="password"
           type="password"
           name="password"
           value={password}

@@ -2,8 +2,20 @@ import React from "react";
 
 // import Directory from "../../components/directory/directory.component";
 
+import ChattingContent from "../../components/chatting-content/chatting-content";
+import OnlineList from "../../components/online-list/online-list.component";
+
 import "./homepage.styles.scss";
 
-const HomePage = () => <div className="homepage">Home Page</div>;
+const HomePage = (props) => {
+  return (
+    <div className="section">
+      <div className="chatting">
+        <ChattingContent />
+        <OnlineList />
+      </div>
+    </div>
+  );
+};
 
 export default HomePage;

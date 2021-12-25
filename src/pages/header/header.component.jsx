@@ -12,6 +12,7 @@ import { signInWithGoogle } from "../../firebase/firebase.utils";
 
 import SignIn from "../../components/sign-in/sign-in.component";
 
+import { firestore } from "../../firebase/firebase.utils";
 import "./header.styles.scss";
 
 const Header = ({ currentUser }) => (
@@ -22,7 +23,17 @@ const Header = ({ currentUser }) => (
     <div className="options">
       <div>
         {currentUser ? (
-          <Button action={() => auth.signOut()} size="small">
+          <Button
+            action={async () => {
+              const userRef = firestore.doc(`users/${currentUser.id}`);
+              await userRef.update({
+                isOnline: false,
+              });
+
+              auth.signOut();
+            }}
+            size="small"
+          >
             Sign Out
           </Button>
         ) : (
