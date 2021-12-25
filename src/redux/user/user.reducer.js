@@ -2,6 +2,8 @@ import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
   currentUser: null,
+  allUsers: [],
+  selectedUser: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +12,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: action.payload,
+      };
+
+    case UserActionTypes.LIST_ALL_USERS:
+      return {
+        ...state,
+        allUsers: action.payload,
+      };
+
+    case UserActionTypes.SET_SELECTED_USER:
+      return {
+        ...state,
+        selectedUser: action.payload,
       };
     default:
       return state;

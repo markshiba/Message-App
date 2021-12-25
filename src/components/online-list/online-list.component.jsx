@@ -1,10 +1,12 @@
+import React from "react";
+import { connect } from "react-redux";
 import "./online-list.scss";
-
-const OnlineList = () => {
+import UserItem from "../user-items/user-item.component";
+const OnlineList = ({ currentUser, allUsers }) => {
   return (
     <div className="main__chatlist">
       <div className="chatlist__heading">
-        <h2>Online Friend</h2>
+        <h2>{currentUser ? currentUser.displayName : null}</h2>
       </div>
       <div className="chatList__search">
         <div className="search_wrap">
@@ -15,10 +17,22 @@ const OnlineList = () => {
         </div>
       </div>
       <div className="chatlist__items">
-        <div>Online user</div>
+        {allUsers.map((user, index) => (
+          <UserItem
+            user={user}
+            // name={user.displayName}
+            // gender={user.gender}
+            // isOnline={user.isOnline ? "active" : ""}
+          />
+        ))}
       </div>
     </div>
   );
 };
 
-export default OnlineList;
+const mapStateToProps = ({ user: { currentUser }, user: { allUsers } }) => ({
+  currentUser,
+  allUsers,
+});
+
+export default connect(mapStateToProps)(OnlineList);

@@ -1,7 +1,5 @@
 import React from "react";
 
-// import Directory from "../../components/directory/directory.component";
-
 import ChattingContent from "../../components/chatting-content/chatting-content";
 import OnlineList from "../../components/online-list/online-list.component";
 

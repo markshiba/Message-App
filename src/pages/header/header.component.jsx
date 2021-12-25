@@ -8,8 +8,6 @@ import { auth } from "../../firebase/firebase.utils";
 
 import Button from "../../components/button/button";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
-
 import SignIn from "../../components/sign-in/sign-in.component";
 
 import { firestore } from "../../firebase/firebase.utils";
@@ -38,8 +36,6 @@ const Header = ({ currentUser }) => (
           </Button>
         ) : (
           <SignIn />
-
-          // <Button action={signInWithGoogle}>Sign In</Button>
         )}
       </div>
     </div>

@@ -7,8 +7,8 @@
   }
 
   &__body {
-    min-height: calc(100vh - calc(100vh / 2));
-    overflow: auto;
+    height: calc(100vh - calc(100vh / 2));
+    overflow: scroll;
   }
 
   &__footer {
