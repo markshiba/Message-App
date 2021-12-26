@@ -1,9 +1,9 @@
 .chatting-content {
-  padding: 20px 40px;
+  padding: 0 40px;
 
   &__header {
     padding-bottom: 15px;
-    border-bottom: 1px solid #ebe7fb;
+    border-bottom: 1.5px solid #ebe7fb;
   }
 
   &__body {
@@ -17,7 +17,7 @@
 }
 
 .send-message {
-  background-color: #fff;
+  background-color: #e6e5ea;
   display: flex;
   justify-content: space-between;
   padding: 10px;
@@ -25,30 +25,31 @@
 }
 
 .send-message button {
-  width: 36px;
+  width: 72px;
   height: 36px;
-  background-color: #ecefff;
+  background-color: #447cb1;
   border: none;
-  box-shadow: none;
   outline: none;
   cursor: pointer;
   font-size: 16px;
   color: #4665ff;
-  padding: 0;
   border-radius: 5px;
   line-height: 36px;
-  transition: all 0.3s cubic-bezier(0.88, 0.19, 0.37, 1.11);
+  color: white;
+  transition: all 0.3s;
 }
 .send-message button:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }
-.send-message button i {
-  display: block;
-}
+
 .send-message input {
   flex-grow: 1;
   padding: 0 15px;
   background-color: transparent;
   border: none;
   outline: none;
+}
+ion-icon {
+  color: #fff;
+  display: inline-block;
 }

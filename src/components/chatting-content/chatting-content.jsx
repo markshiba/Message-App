@@ -1,11 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import "./chatting-content.scss";
 import { firestore } from "../../firebase/firebase.utils";
 import Message from "../message/message.coponent";
+import { setMessageChatted } from "../../redux/messages/messages.action";
+import AvatarName from "../avatar-name/avatar-name.component";
 
 const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
-  useEffect(() => {}, []);
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messageChatted]);
 
   const [message, setMessage] = useState("");
   const onChatting = (e) => {
@@ -13,13 +23,6 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
   };
 
   const onSent = (e) => {
-    // const messagePackage = {
-    //   user1: currentUser.id,
-    //   user2: selectedUser.id,
-    //   message: message,
-    //   isChatting: true,
-    // };
-
     if (!message || !currentUser || !selectedUser) {
       setMessage("");
       return;
@@ -29,6 +32,7 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
     firestore
       .collection("messages")
       .add({
+        createdAt: new Date(),
         user1: currentUser.id,
         user2: selectedUser.id,
         message: message,
@@ -47,12 +51,24 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
   return (
     <div className="chatting-content">
       <div className="chatting-content__header">
-        {selectedUser ? selectedUser.displayName : null}
+        {selectedUser ? (
+          <AvatarName
+            avatarSrc={selectedUser.avatarSrc}
+            displayName={selectedUser.displayName}
+          />
+        ) : null}
       </div>
       <div className="chatting-content__body">
         {messageChatted
-          ? messageChatted.map((message) => <Message props={message}></Message>)
+          ? messageChatted.map((message) => (
+              <Message
+                messageInfo={message}
+                currentUser={currentUser}
+              ></Message>
+            ))
           : null}
+
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="chatting-content__footer">
@@ -63,19 +79,25 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
             onChange={onChatting}
             value={message}
           />
-          <button onClick={onSent} className="btnSendMsg" id="sendMsgBtn">
-            <i className="fa fa-paper-plane"></i>
-            send
+
+          <button onClick={onSent} className="btnSendMsg">
+            Send
           </button>
         </div>
       </div>
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  setMessageChatted: (messageChatted) =>
+    dispatch(setMessageChatted(messageChatted)),
+});
+
 const mapStateToProps = ({ user, message }) => ({
   selectedUser: user.selectedUser,
   currentUser: user.currentUser,
   messageChatted: message.messageChatted,
 });
 
-export default connect(mapStateToProps)(ChattingContent);
+export default connect(mapStateToProps, mapDispatchToProps)(ChattingContent);

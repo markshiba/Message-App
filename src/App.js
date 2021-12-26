@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -12,6 +12,7 @@ import { setCurrentUser, listAllUser } from "./redux/user/user.actions";
 import { createUserProfileDocument } from "./firebase/firebase.utils";
 
 import { firestore } from "./firebase/firebase.utils";
+import { setSelectedUser } from "./redux/user/user.actions";
 
 import "./App.css";
 
@@ -19,12 +20,24 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-    const { setCurrentUser, listAllUser, currentUser } = this.props;
+    const { setCurrentUser, listAllUser, setSelectedUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
+          firestore.collection("users").onSnapshot((querySnapshot) => {
+            var users = [];
+            querySnapshot.forEach((doc) => {
+              if (snapShot.id !== doc.id)
+                users.push({ id: doc.id, ...doc.data() });
+            });
+            // arr.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
+
+            listAllUser(users);
+            setSelectedUser(users[0]);
+          });
+
           setCurrentUser({
             id: snapShot.id,
             ...snapShot.data(),
@@ -32,31 +45,7 @@ class App extends React.Component {
         });
       }
       setCurrentUser(userAuth);
-
-      const db = firestore.collection("users").onSnapshot((querySnapshot) => {
-        var users = [];
-        querySnapshot.forEach((doc) => {
-          users.push({ id: doc.id, ...doc.data() });
-        });
-
-        listAllUser(users);
-      });
     });
-
-    // if (currentUser) {
-    //   console.log("asd");
-
-    // const unsubscribe = db.collection("users"); // .where("state", "==", "CA")
-
-    // console.log(unsubscribe);
-
-    // .onSnapshot((querySnapshot) => {
-    //   var cities = [];
-    //   querySnapshot.forEach((doc) => {
-    //     cities.push(doc.data().name);
-    //   });
-    //   console.log("Current cities in CA: ", cities.join(", "));
-    // });
   }
 
   componentWillUnmount() {
@@ -68,7 +57,13 @@ class App extends React.Component {
       <div className="app">
         <Header></Header>
         <Switch>
-          <Route exact path="/" component={HomePage} />
+          <Route
+            exact
+            path="/"
+            render={() =>
+              this.props.currentUser ? <HomePage /> : <Redirect to="/login" />
+            }
+          />
           <Route exact path="/login" component={Login} />
         </Switch>
       </div>
@@ -76,13 +71,15 @@ class App extends React.Component {
   }
 }
 
-const mapStateToProps = ({ user: { currentUser } }) => ({
-  currentUser,
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser,
+  selectedUser: user.selectedUser,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)),
   listAllUser: (allUser) => dispatch(listAllUser(allUser)),
+  setSelectedUser: (user) => dispatch(setSelectedUser(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

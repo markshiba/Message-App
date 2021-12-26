@@ -21,11 +21,15 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   const snapShot = await userRef.get();
 
+  let num = Math.floor(Math.random() * 70);
+
+  const avatarSrc = `https://i.pravatar.cc/150?img=${num}`;
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
     try {
       await userRef.set({
+        avatarSrc,
         isOnline: true,
         displayName,
         email,

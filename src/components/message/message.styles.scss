@@ -1,0 +1,27 @@
+.chat__item {
+  padding: 0 1rem;
+}
+
+.chat__item__content {
+  display: grid;
+  gap: 3rem;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 1rem;
+}
+
+.right {
+  grid-column: 2;
+
+  padding: 15px;
+  border-radius: 10px 10px 0 10px;
+  background-color: #447cb1;
+  color: #fff;
+}
+.left {
+  grid-column: 1;
+  padding: 15px;
+
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px 10px 10px 0;
+}

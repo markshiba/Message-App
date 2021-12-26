@@ -3,7 +3,11 @@
   padding: 0 40px 0 0px;
 
   .chatlist__heading {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid #ebe7fb;
   }
 
   .search_wrap {
@@ -29,4 +33,38 @@
       font-size: 15px;
     }
   }
+}
+
+.profile__card {
+  padding: 1rem;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 15px;
+}
+
+.profile__card .profile__image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.profile__card .profile__image img {
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.profile__card h4 {
+  margin-bottom: 0;
+}
+
+.chatlist__items {
+  margin-top: 30px;
+  overflow: auto;
+  max-height: calc(100vh - calc(100vh / 2));
 }

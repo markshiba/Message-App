@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-import Avatar from "../avatar/avatar.component";
+import AvatarName from "../avatar-name/avatar-name.component";
 import { firestore } from "../../firebase/firebase.utils";
 import { setSelectedUser } from "../../redux/user/user.actions";
 import { setMessageChatted } from "../../redux/messages/messages.action";
@@ -14,17 +13,15 @@ const UserItem = ({
   currentUser,
   setMessageChatted,
 }) => {
-  const { displayName, isOnline } = user;
-  console.log("currentUser", currentUser);
+  const { displayName, isOnline, avatarSrc } = user;
+
   const onSelectedUser = () => {
     setSelectedUser(user);
-    if (!currentUser || !user) return;
-
-    // .where("user1", "in", [user.id, currentUser.id])
-
+    // if (!currentUser || !user) return;
     firestore
       .collection("messages")
-      .where("user1", "in", [currentUser.id, user.id])
+      // .where(currentUser.id, "in", ["user1", "user2"])
+      .orderBy("createdAt")
       .onSnapshot((querySnapshot) => {
         var allMessages = [];
         querySnapshot.forEach((doc) => {
@@ -32,12 +29,12 @@ const UserItem = ({
             (doc.data().user1 === currentUser.id &&
               doc.data().user2 === user.id) ||
             (doc.data().user1 === user.id &&
-              doc.data().user2 === user.currentUser.id)
+              doc.data().user2 === currentUser.id)
           ) {
             allMessages.push(doc.data());
           }
         });
-        console.log("Current cities in CA: ", allMessages);
+
         setMessageChatted(allMessages);
       });
   };
@@ -47,11 +44,9 @@ const UserItem = ({
       onClick={onSelectedUser}
       className={`chatlist__item ${isOnline ? isOnline : ""} `}
     >
-      <Avatar isOnline={isOnline} />
-
-      <div className="userMeta">
-        <p>{displayName}</p>
-        <span className="activeTime">32 mins ago</span>
+      <div className="user-status">
+        <span className={`${isOnline ? "active" : "off"} active-status`}></span>
+        <AvatarName avatarSrc={avatarSrc} displayName={displayName} />
       </div>
     </div>
   );

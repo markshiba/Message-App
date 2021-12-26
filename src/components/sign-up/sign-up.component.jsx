@@ -6,7 +6,11 @@ import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
 
 import "./sign-up.styles.scss";
 
-const SignUp = ({ signUpStart }) => {
+import { withRouter } from "react-router-dom";
+
+import firebase from "@firebase/app-compat";
+
+const SignUp = ({ signUpStart, history }) => {
   const [userCredentials, setUserCredentials] = useState({
     displayName: "",
     email: "",
@@ -29,6 +33,34 @@ const SignUp = ({ signUpStart }) => {
       alert("passwords don't match");
       return;
     }
+
+    // const { user } = firebase
+    //   .auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then((userCredential) => {
+    //     createUserProfileDocument(user, {
+    //       displayName,
+    //       gender,
+    //       birthday,
+    //     });
+
+    //     setUserCredentials(...userCredentials, {
+    //       displayName: "",
+    //       email: "",
+    //       password: "",
+    //       confirmPassword: "",
+    //       gender: "",
+    //       birthday: "",
+    //     });
+
+    //     history.push("/");
+    //   })
+    //   .catch((error) => {
+    //     var errorCode = error.code;
+    //     var errorMessage = error.message;
+    //     // ..
+    //   });
+
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
@@ -36,18 +68,20 @@ const SignUp = ({ signUpStart }) => {
       );
 
       await createUserProfileDocument(user, { displayName, gender, birthday });
-
-      setUserCredentials(...userCredentials, {
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        gender: "",
-        birthday: "",
-      });
     } catch (error) {
       console.error(error);
     }
+
+    history.push("/");
+
+    setUserCredentials({
+      displayName: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      gender: "",
+      birthday: "",
+    });
   };
 
   return (
@@ -141,4 +175,4 @@ const SignUp = ({ signUpStart }) => {
   );
 };
 
-export default SignUp;
+export default withRouter(SignUp);

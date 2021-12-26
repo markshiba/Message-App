@@ -6,7 +6,12 @@ const OnlineList = ({ currentUser, allUsers }) => {
   return (
     <div className="main__chatlist">
       <div className="chatlist__heading">
-        <h2>{currentUser ? currentUser.displayName : null}</h2>
+        <div className="profile__card user__profile__image">
+          <div className="profile__image">
+            <img src={currentUser.avatarSrc} />
+          </div>
+          <h4>{currentUser ? currentUser.displayName : null}</h4>
+        </div>
       </div>
       <div className="chatList__search">
         <div className="search_wrap">
@@ -18,12 +23,7 @@ const OnlineList = ({ currentUser, allUsers }) => {
       </div>
       <div className="chatlist__items">
         {allUsers.map((user, index) => (
-          <UserItem
-            user={user}
-            // name={user.displayName}
-            // gender={user.gender}
-            // isOnline={user.isOnline ? "active" : ""}
-          />
+          <UserItem user={user} key={index} />
         ))}
       </div>
     </div>
