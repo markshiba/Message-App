@@ -35,7 +35,7 @@ class App extends React.Component {
             // arr.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
 
             listAllUser(users);
-            setSelectedUser(users[0]);
+            // setSelectedUser(users[0]);
           });
 
           setCurrentUser({

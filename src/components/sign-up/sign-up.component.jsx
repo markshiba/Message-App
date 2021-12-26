@@ -2,7 +2,11 @@ import React, { useState } from "react";
 
 import Button from "../../components/button/button";
 
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
+import {
+  auth,
+  createUserProfileDocument,
+  signInWithGoogle,
+} from "../../firebase/firebase.utils";
 
 import "./sign-up.styles.scss";
 
@@ -86,9 +90,7 @@ const SignUp = ({ signUpStart, history }) => {
 
   return (
     <div className="sign-up">
-      <div className="sign-up-describe">
-        <h2 className="title">Create your account</h2>
-      </div>
+      <h2 className="sign-up-describe">Start exploring NearApp</h2>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <div className="form-info">
           <div>
@@ -162,6 +164,7 @@ const SignUp = ({ signUpStart, history }) => {
               onChange={handleChange}
               defaultValue="Select Gender"
               name="gender"
+              required
             >
               <option defaultValue>Select Gender</option>
               <option value="male">Male</option>
@@ -169,7 +172,12 @@ const SignUp = ({ signUpStart, history }) => {
             </select>
           </div>
         </div>
-        <Button type="submit">SIGN UP</Button>
+        <div className="button-container">
+          <Button type="submit">CREATE YOUR ACCOUNT</Button>
+          <Button type="button" action={signInWithGoogle}>
+            SIGN UP WITH GOOGLE
+          </Button>
+        </div>
       </form>
     </div>
   );

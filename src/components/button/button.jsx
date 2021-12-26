@@ -3,7 +3,11 @@ import React from "react";
 import "./button.styles.scss";
 
 const Button = (props) => (
-  <button className={`" btn ${props.size} "`} onClick={props.action}>
+  <button
+    type={props.type}
+    className={`" btn ${props.size} "`}
+    onClick={props.action}
+  >
     {props.children}
   </button>
 );
