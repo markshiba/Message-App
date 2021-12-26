@@ -1,5 +1,6 @@
 import React from "react";
 import "./message.styles.scss";
+import Linkify from "react-linkify";
 
 const Message = ({ messageInfo, currentUser }) => {
   let messageSide = "";
@@ -12,7 +13,7 @@ const Message = ({ messageInfo, currentUser }) => {
     <div className={`chat__item`}>
       <div className="chat__item__content">
         <div className={` ${messageSide}`}>
-          <div className="chat__msg">{messageInfo.message}</div>
+          <Linkify className="chat__msg">{messageInfo.message}</Linkify>
         </div>
       </div>
     </div>

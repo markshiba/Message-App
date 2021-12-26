@@ -4,7 +4,9 @@ body {
 }
 
 a {
-  text-decoration: none;
+  color: #fff;
+}
+a:hover {
   color: black;
 }
 
@@ -20,10 +22,7 @@ body {
   font-weight: 400;
   color: #555;
 
-  /* background-color: #fae0e4; */
   background-color: #ffd8be;
-
-  /* background-color: #f0e6ef; */
 
   /* font-size: 62.5%; */
 }

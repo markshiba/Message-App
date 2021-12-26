@@ -22,7 +22,35 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
     setMessage(e.target.value);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && message !== "") {
+      //save message on firestore
+      firestore
+        .collection("messages")
+        .add({
+          createdAt: new Date(),
+          user1: currentUser.id,
+          user2: selectedUser.id,
+          message: message,
+          isChatting: true,
+        })
+        .then((docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+
+      setMessage("");
+    }
+  };
+
   const onSent = (e) => {
+    if (e.key === "Enter") {
+      setMessage("");
+      return;
+    }
+
     if (!message || !currentUser || !selectedUser) {
       setMessage("");
       return;
@@ -78,6 +106,7 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
             placeholder="Type your message here"
             onChange={onChatting}
             value={message}
+            onKeyDown={handleKeyDown}
           />
 
           <button onClick={onSent} className="btnSendMsg">

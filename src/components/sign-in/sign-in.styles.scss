@@ -4,6 +4,17 @@
   align-items: center;
   gap: 1rem;
 
+  &-container {
+    display: flex;
+    gap: 1rem;
+
+    @media screen and (max-width: 680px) {
+      flex-direction: column;
+      gap: 5px;
+      // margin-top: 10px;
+    }
+  }
+
   input,
   select {
     padding: 0.5rem;

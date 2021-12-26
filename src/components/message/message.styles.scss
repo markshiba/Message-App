@@ -11,7 +11,7 @@
 
 .right {
   grid-column: 2;
-
+  justify-self: end;
   padding: 15px;
   border-radius: 10px 10px 0 10px;
   background-color: #447cb1;
@@ -20,7 +20,7 @@
 .left {
   grid-column: 1;
   padding: 15px;
-
+  justify-self: start;
   background-color: #fff;
   color: #000;
   border-radius: 10px 10px 10px 0;

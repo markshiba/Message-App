@@ -59,31 +59,33 @@ const SignIn = ({ history }) => {
 
   return (
     <form className="sign-in-form" onSubmit={handleSubmit} autoComplete="off">
-      <div>
-        <input
-          className="sign-in-input"
-          type="email"
-          name="email"
-          value={email}
-          onChange={handleChange}
-          label="Email"
-          placeholder="Email"
-          required
-          autoComplete="off"
-        />
-      </div>
+      <div className="sign-in-form-container">
+        <div>
+          <input
+            className="sign-in-input"
+            type="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            label="Email"
+            placeholder="Email"
+            required
+            autoComplete="off"
+          />
+        </div>
 
-      <div>
-        <input
-          className="sign-in-input"
-          type="password"
-          name="password"
-          value={password}
-          onChange={handleChange}
-          label="Password"
-          placeholder="Password"
-          required
-        />
+        <div>
+          <input
+            className="sign-in-input"
+            type="password"
+            name="password"
+            value={password}
+            onChange={handleChange}
+            label="Password"
+            placeholder="Password"
+            required
+          />
+        </div>
       </div>
 
       <Button type="submit" size="small">
