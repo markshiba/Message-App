@@ -22,8 +22,8 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
     setMessage(e.target.value);
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter" && message !== "") {
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && message !== "") {
       //save message on firestore
       firestore
         .collection("messages")
@@ -40,17 +40,11 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
         .catch((error) => {
           console.error("Error adding document: ", error);
         });
-
       setMessage("");
     }
   };
 
   const onSent = (e) => {
-    if (e.key === "Enter") {
-      setMessage("");
-      return;
-    }
-
     if (!message || !currentUser || !selectedUser) {
       setMessage("");
       return;
@@ -108,7 +102,6 @@ const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
             value={message}
             onKeyDown={handleKeyDown}
           />
-
           <button onClick={onSent} className="btnSendMsg">
             Send
           </button>

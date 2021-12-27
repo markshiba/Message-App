@@ -8,7 +8,6 @@ import {
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
 
 // import firebase from "@firebase/app-compat";
 import Button from "../../components/button/button";
