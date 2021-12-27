@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import "./online-list.scss";
 import UserItem from "../user-items/user-item.component";
+import "./online-list.scss";
+
 const OnlineList = ({ currentUser, allUsers }) => {
   return (
     <div className="main-chatlist">

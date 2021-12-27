@@ -1,6 +1,6 @@
 import React from "react";
-import "./message.styles.scss";
 import Linkify from "react-linkify";
+import "./message.styles.scss";
 
 const Message = ({ messageInfo, currentUser }) => {
   let messageSide = "";

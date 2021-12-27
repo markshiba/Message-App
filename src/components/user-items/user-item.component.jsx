@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import AvatarName from "../avatar-name/avatar-name.component";
 import { firestore } from "../../firebase/firebase.utils";
 import { setSelectedUser } from "../../redux/user/user.actions";
 import { setMessageChatted } from "../../redux/messages/messages.action";
-
+import AvatarName from "../avatar-name/avatar-name.component";
 import "./user-item.styles.scss";
 
 const UserItem = ({

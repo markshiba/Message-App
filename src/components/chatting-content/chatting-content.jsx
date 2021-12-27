@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
-import "./chatting-content.scss";
 import { firestore } from "../../firebase/firebase.utils";
-import Message from "../message/message.coponent";
 import { setMessageChatted } from "../../redux/messages/messages.action";
+import Message from "../message/message.coponent";
 import AvatarName from "../avatar-name/avatar-name.component";
+import "./chatting-content.scss";
 
 const ChattingContent = ({ selectedUser, currentUser, messageChatted }) => {
   const messagesEndRef = useRef(null);

@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-
-import Button from "../../components/button/button";
-
+import { withRouter } from "react-router-dom";
 import {
   auth,
   createUserProfileDocument,
   signInWithGoogle,
 } from "../../firebase/firebase.utils";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
+
+// import firebase from "@firebase/app-compat";
+import Button from "../../components/button/button";
 import "./sign-up.styles.scss";
-
-import { withRouter } from "react-router-dom";
-
-import firebase from "@firebase/app-compat";
 
 const SignUp = ({ signUpStart, history }) => {
   const [userCredentials, setUserCredentials] = useState({
@@ -21,7 +21,7 @@ const SignUp = ({ signUpStart, history }) => {
     password: "",
     confirmPassword: "",
     gender: "",
-    birthday: "",
+    birthday: new Date(),
   });
   const { displayName, email, password, confirmPassword, gender, birthday } =
     userCredentials;
@@ -144,17 +144,18 @@ const SignUp = ({ signUpStart, history }) => {
               required
             />
           </div>
-
           <div>
             <label>Birthday</label>
-            <input
-              id="birthday"
-              type="number"
-              name="birthday"
-              value={birthday}
-              onChange={handleChange}
-              label="birthday"
-              required
+
+            <DatePicker
+              selected={birthday}
+              onChange={(date) => {
+                setUserCredentials({ ...userCredentials, birthday: date });
+              }}
+              placeholderText={"dd/mm/yyyy"}
+              maxDate={new Date()}
+              showYearDropdown
+              scrollableYearDropdown
             />
           </div>
 

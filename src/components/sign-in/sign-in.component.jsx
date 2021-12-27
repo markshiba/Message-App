@@ -1,12 +1,8 @@
 import React, { useState } from "react";
-
-import Button from "../../components/button/button";
-
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
-import { firestore } from "../../firebase/firebase.utils";
+import { auth, firestore } from "../../firebase/firebase.utils";
 import { withRouter } from "react-router";
-
-import firebase from "@firebase/app-compat";
+// import firebase from "@firebase/app-compat";
+import Button from "../../components/button/button";
 import "./sign-in.styles.scss";
 
 const SignIn = ({ history }) => {
