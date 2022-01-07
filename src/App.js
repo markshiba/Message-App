@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { auth } from "./firebase/firebase.utils";
@@ -11,15 +11,13 @@ import { firestore } from "./firebase/firebase.utils";
 import { setSelectedUser } from "./redux/user/user.actions";
 import "./App.css";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { setCurrentUser, listAllUser, setSelectedUser } = this.props;
-
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+const App = (props) => {
+  const { currentUser, setCurrentUser, listAllUser, setSelectedUser } = props;
+  useEffect(() => {
+    const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
+
         userRef.onSnapshot((snapShot) => {
           firestore.collection("users").onSnapshot((querySnapshot) => {
             var users = [];
@@ -27,10 +25,7 @@ class App extends React.Component {
               if (snapShot.id !== doc.id)
                 users.push({ id: doc.id, ...doc.data() });
             });
-            // arr.sort((a, b) => statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status));
-
             listAllUser(users);
-            // setSelectedUser(users[0]);
           });
 
           setCurrentUser({
@@ -41,30 +36,25 @@ class App extends React.Component {
       }
       setCurrentUser(userAuth);
     });
-  }
+    return () => {
+      unsubscribeFromAuth();
+    };
+  }, []);
 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
-
-  render() {
-    return (
-      <div className="app">
-        <Header></Header>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() =>
-              this.props.currentUser ? <HomePage /> : <Redirect to="/login" />
-            }
-          />
-          <Route exact path="/login" component={Login} />
-        </Switch>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="app">
+      <Header></Header>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={() => (currentUser ? <HomePage /> : <Redirect to="/login" />)}
+        />
+        <Route exact path="/login" component={Login} />
+      </Switch>
+    </div>
+  );
+};
 
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser,

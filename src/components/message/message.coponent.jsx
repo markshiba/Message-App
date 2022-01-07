@@ -10,10 +10,10 @@ const Message = ({ messageInfo, currentUser }) => {
     messageSide = "left";
   }
   return (
-    <div className={`chat__item`}>
-      <div className="chat__item__content">
+    <div className={`chat-item`}>
+      <div className="chat-item-content">
         <div className={` ${messageSide}`}>
-          <Linkify className="chat__msg">{messageInfo.message}</Linkify>
+          <Linkify className="chat-msg">{messageInfo.message}</Linkify>
         </div>
       </div>
     </div>
