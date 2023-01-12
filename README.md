@@ -1,6 +1,6 @@
 # Message App
 
-A developing messaging app
+A messaging app
 
 
 
@@ -8,4 +8,4 @@ A developing messaging app
 
 Visit the project at:
 
-https://near-talk.herokuapp.com/
+https://near-chat.vercel.app
